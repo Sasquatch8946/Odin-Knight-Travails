@@ -45,17 +45,11 @@ const HashSet = (function () {
         return keys().length
     }
 
-
-    const hash = function (key) {
-        let hashCode = 0;
-            
-        const primeNumber = 31;
-        for (let i = 0; i < key.length; i++) {
-            hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % capacity ;
-        }
-
-        return hashCode;
-    } 
+    const hash = function (coords) {
+        const [x, y] = coords;
+        const hash = ( (x + y) * (x + y + 1) / 2) + y
+        return hash;
+    }
 
     const copyMap = function (newArray) {
         const allEntries = entries(); 
@@ -106,6 +100,7 @@ const HashSet = (function () {
             hMap[indx].append(key);
         }
 
+
     }
 
     const add = function (key) {
@@ -126,6 +121,8 @@ const HashSet = (function () {
         }
 
         setKey(key);
+
+        return indx;
 
     }
 
@@ -174,6 +171,11 @@ const HashSet = (function () {
         return capacity;
     }
 
+    const get = function (key) {
+        const indx = hash(key);
+        return hMap[indx].headNode;
+    }
+
     return {
         hash,
         add,
@@ -185,6 +187,8 @@ const HashSet = (function () {
         clear,
         copyMap,
         getCapacity,
+        get,
+        hMap,
     }
 });
 

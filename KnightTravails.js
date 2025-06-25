@@ -1,10 +1,28 @@
-import HashMap from './/HashMap.js';
-
+import HashSet from './/HashSet.js';
+import LinkedList from './LinkedList.js';
 
 const KnightTravails = (function () {
 
     
-    const Hash = HashMap();
+    const Hash = HashSet();
+
+    const calculateMoves = function (coords) {
+        const [x, y] = coords;
+        const poss = [];
+        poss.push([x+2, y+1]);
+        poss.push([x+1, y+2]);
+        poss.push([x-2, y+1]);
+        poss.push([x+1, y-2]);
+        poss.push([x-1, y+2]);
+        poss.push([x+2, y-1]);
+        poss.push([x-2, y-1]);
+        poss.push([x-1, y-2]);
+        const possibilities = poss.filter((arr) => {
+            return arr.every((i) => i >= 0 && i < 8);
+        });
+
+        return possibilities;
+    }
 
     const createGraph = function () {
 
@@ -20,20 +38,25 @@ const KnightTravails = (function () {
     }
 
     const initialize = function () {
-        const uniqueHashes = [];
         const graph = createGraph();       
 
         for (let i = 0; i < graph.length; i++) {
-            Hash.set(graph[i][0], graph[i][1]);
+            const indx = Hash.add([graph[i][0], graph[i][1]]);
+            const possMoves = calculateMoves([graph[i][0], graph[i][1]]);
+            possMoves.forEach((mv) => {
+                Hash.hMap[indx].append(mv);
+            });
         }
 
 
     }
 
 
+
     return {
         initialize,
         Hash,
+        calculateMoves,
     }
 })();
 
