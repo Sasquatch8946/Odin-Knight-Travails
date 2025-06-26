@@ -3,7 +3,7 @@ import LinkedList from './LinkedList.js';
 const HashSet = (function () {
 
     let loadFactor = 0.75;
-    let capacity = 86;
+    let capacity = 600;
     let hMap = new Array(capacity);
 
     const has = function (key) {
@@ -47,7 +47,7 @@ const HashSet = (function () {
 
     const hash = function (coords) {
         const [x, y] = coords;
-        const hash = ( (x + y) * (x + y + 1) / 2) + y
+        const hash = (( (x + y) * (x + y + 1) / 2) + y) % capacity;
         return hash;
     }
 
