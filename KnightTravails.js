@@ -114,7 +114,6 @@ const KnightTravails = (function () {
         while (frontIndex < q.length) {
            let front = q[frontIndex]; 
            if (areEqualArrays(front.pos, destination)) {
-            console.log("got to the destination!");
             visited.push(front);
             break;
            } else {
@@ -134,7 +133,7 @@ const KnightTravails = (function () {
 
         const trace = traceOrigin(visited);
 
-        console.log(`=> You made it in ${trace.length} moves. Here's your path:`);
+        console.log(`=> You made it in ${trace.length - 1} moves. Here's your path:`);
         trace.forEach((coords) => {
             console.log(coords);
         });
