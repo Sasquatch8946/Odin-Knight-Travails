@@ -8,4 +8,4 @@ console.log(KnightTravails.Hash.get([0, 0]));
 
 console.log(KnightTravails.calculateMoves([3, 3]));*/
 
-console.log(KnightTravails.move([0, 0], [2, 4]));
+KnightTravails.move([0, 0], [2, 4]);

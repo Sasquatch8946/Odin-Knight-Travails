@@ -78,6 +78,32 @@ const KnightTravails = (function () {
         return mainArray.some((i) => areEqualArrays(i.pos, nested));
     }
 
+    const getIndexOfNestedArray = function (mainArray, coords) {
+        let indx;
+        for (let i = 0; i < mainArray.length; i++) {
+            if (areEqualArrays(mainArray[i].pos, coords)) {
+                indx = i;
+            }
+        }
+
+        return indx;
+    }
+
+    const traceOrigin = function (visitedArray) {
+        const trace = [];
+        let curr = visitedArray.at(-1);
+
+        while (!areEqualArrays(curr.pos, curr.origin)) {
+            trace.unshift(curr.pos);
+            const nextIndx = getIndexOfNestedArray(visitedArray, curr.origin);
+            curr = visitedArray[nextIndx];
+        }
+
+        trace.unshift(visitedArray[0].pos);
+
+        return trace;
+    }
+
     const move = function (start, destination) {
 
         const visited = [];
@@ -106,7 +132,12 @@ const KnightTravails = (function () {
            frontIndex++;
         }
 
-        return visited;
+        const trace = traceOrigin(visited);
+
+        console.log(`=> You made it in ${trace.length} moves. Here's your path:`);
+        trace.forEach((coords) => {
+            console.log(coords);
+        });
 
 
 
