@@ -1,5 +1,4 @@
 import HashSet from './/HashSet.js';
-import LinkedList from './LinkedList.js';
 
 const KnightTravails = (function () {
 
